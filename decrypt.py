@@ -107,4 +107,4 @@ for row in outMat:
     outString.extend(row)
 outString = "".join(outString)
 outFile = open("output.txt", "w")
-outFile.write(outString)
+outFile.write(outString.strip())
