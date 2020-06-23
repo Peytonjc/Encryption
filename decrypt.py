@@ -5,6 +5,21 @@ inText = inFile.read()
 inFile.close()
 print(inText)
 
+# Ask for password
+pas = input("Input a four digit password:")
+
+pasOne = int(pas[1])
+pasTwo = int(pas[3])
+pasThree = int(pas[0])
+pasFour = int(pas[2])
+
+inText = list(inText)
+ascMod = pasFour * pasThree
+i = 0
+for ele in inText:
+    inText[i] = chr(ord(ele) - ascMod)
+    i += 1
+
 padNum = 5 - (len(inText) % 5)
 if padNum == 5:
     padNum = 0
@@ -19,13 +34,6 @@ for j in range(int(len(inText) / 5)):
         i = i + 1
     textMat.append(a)
 
-# Ask for password
-pas = input("Input a four digit password:")
-
-pasOne = int(pas[1])
-pasTwo = int(pas[3])
-pasThree = int(pas[0])
-pasFour = int(pas[2])
 
 newMat = textMat
 rowNum = int(len(inText) / 5)

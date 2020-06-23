@@ -104,10 +104,19 @@ for j in range(3):
 for row in newMat:
     print(row)
 
-# Combine results in a string and write to file
-outString = []
+# Combine results in a list
+outList = []
 for row in newMat:
-    outString.extend(row)
-outString = "".join(outString)
+    outList.extend(row)
+
+# Further modify the output by changing the ascii values based on the first and third value in the password
+ascMod = pasFour * pasThree
+i = 0
+for ele in outList:
+    outList[i] = chr(ord(ele) + ascMod)
+    i += 1
+
+# Turn list into a string and write to file
+outString = "".join(outList)
 outFile = open("output.txt", "w")
 outFile.write(outString)
