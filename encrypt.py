@@ -1,7 +1,7 @@
 # Opening and reading the input file
 file = input("What is the name of the file you would like to encrypt:")
 ext = file[-4:]
-if ext == ".png":
+if (ext == ".png") or (ext == ".jpg"):
 
     with open(file, "rb") as imageFile:
         import binascii
@@ -148,4 +148,8 @@ if ext == ".txt":
     outFile = open("output.txt", "w")
     outFile.write(outString)
     print("Result will be found in 'output.txt'")
+if ext == ".jpg":
+    outFile = open("output.jpg", "w")
+    outFile.write(outString)
+    print("Result will be found in 'output.jpg'")
 outFile.close()
