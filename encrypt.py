@@ -6,7 +6,6 @@ if ext == ".png":
     with open(file, "rb") as imageFile:
         import binascii
         inText = (imageFile.read())
-        print(inText)
         i = binascii.hexlify(inText)
         inText = str(inText)
         inText = inText[2:]
@@ -20,7 +19,6 @@ elif ext == ".txt":
 else:
     print("File type not supported\n")
     quit()
-print(inText)
 
 # Add padding to the text file in the form of whitespace and convert to a matrix format
 padNum = 5 - (len(inText) % 5)
@@ -126,8 +124,6 @@ for j in range(3):
         else:
             a = textMat[i][:4] + list(textMat[i + 1][4])
         newMat.append(a)
-for row in newMat:
-    print(row)
 
 # Combine results in a list
 outList = []
@@ -147,7 +143,9 @@ outString = "".join(outList)
 if ext == ".png":
     outFile = open("output.png", "w")
     outFile.write(outString)
+    print("Result will be found in 'output.png'")
 if ext == ".txt":
     outFile = open("output.txt", "w")
     outFile.write(outString)
+    print("Result will be found in 'output.txt'")
 outFile.close()

@@ -2,13 +2,12 @@ import base64
 # Opening and reading the input file
 file = input("What is the name of the file you would like to decrypt:")
 ext = file[-4:]
-if ext != '.txt' and '.png':
+if ext != ('.txt' and '.png'):
     print("File type not supported.\n")
     quit()
 inFile = open(file, "r")
 inText = inFile.read()
 inFile.close()
-print(inText)
 
 # Ask for password
 pas = input("Input a four digit password:")
@@ -119,9 +118,6 @@ for j in range(pasOne):
         else:
             a = list(newMat[i - 1][0]) + newMat[i][1:]
         outMat.append(a)
-print('\n')
-for row in outMat:
-    print(row)
 
 outString = []
 for row in outMat:
@@ -131,10 +127,12 @@ outString = "".join(outString)
 if ext == ".txt":
     outFile = open("output.txt", "w")
     outFile.write(outString.strip())
+    print("Result will be found in 'output.txt'")
 elif ext == ".png":
     outString = outString.strip()
     outString = bytes(outString, 'utf-8')
     outString = outString.decode('unicode-escape').encode('ISO-8859-1')
     outFile = open("output.png", "wb")
     outFile.write(outString)
+    print("Result will be found in 'output.png'")
 outFile.close()
