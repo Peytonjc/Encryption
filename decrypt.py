@@ -1,5 +1,10 @@
+import base64
 # Opening and reading the input file
 file = input("What is the name of the file you would like to decrypt:")
+ext = file[-4:]
+if ext != '.txt' and '.png':
+    print("File type not supported.\n")
+    quit()
 inFile = open(file, "r")
 inText = inFile.read()
 inFile.close()
@@ -7,6 +12,14 @@ print(inText)
 
 # Ask for password
 pas = input("Input a four digit password:")
+try:
+    int(pas)
+except:
+    print("This password will not work.")
+    quit()
+if len(pas) != 4:
+    print("This password will not work.")
+    quit()
 
 pasOne = int(pas[1])
 pasTwo = int(pas[3])
@@ -114,5 +127,14 @@ outString = []
 for row in outMat:
     outString.extend(row)
 outString = "".join(outString)
-outFile = open("output.txt", "w")
-outFile.write(outString.strip())
+
+if ext == ".txt":
+    outFile = open("output.txt", "w")
+    outFile.write(outString.strip())
+elif ext == ".png":
+    outString = outString.strip()
+    outString = bytes(outString, 'utf-8')
+    outString = outString.decode('unicode-escape').encode('ISO-8859-1')
+    outFile = open("output.png", "wb")
+    outFile.write(outString)
+outFile.close()

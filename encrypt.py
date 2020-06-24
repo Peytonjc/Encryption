@@ -1,8 +1,25 @@
 # Opening and reading the input file
 file = input("What is the name of the file you would like to encrypt:")
-inFile = open(file, "r")
-inText = inFile.read()
-inFile.close()
+ext = file[-4:]
+if ext == ".png":
+
+    with open(file, "rb") as imageFile:
+        import binascii
+        inText = (imageFile.read())
+        print(inText)
+        i = binascii.hexlify(inText)
+        inText = str(inText)
+        inText = inText[2:]
+        inText = inText[:-1]
+
+elif ext == ".txt":
+    inFile = open(file, "r")
+    inText = inFile.read()
+    inFile.close()
+
+else:
+    print("File type not supported\n")
+    quit()
 print(inText)
 
 # Add padding to the text file in the form of whitespace and convert to a matrix format
@@ -22,6 +39,14 @@ for j in range(int(len(inText) / 5)):
 
 # Ask for password
 pas = input("Input a four digit password:")
+try:
+    int(pas)
+except:
+    print("This password will not work.")
+    quit()
+if len(pas) != 4:
+    print("This password will not work.")
+    quit()
 
 newMat = []
 rowNum = int(len(inText) / 5)
@@ -118,5 +143,11 @@ for ele in outList:
 
 # Turn list into a string and write to file
 outString = "".join(outList)
-outFile = open("output.txt", "w")
-outFile.write(outString)
+
+if ext == ".png":
+    outFile = open("output.png", "w")
+    outFile.write(outString)
+if ext == ".txt":
+    outFile = open("output.txt", "w")
+    outFile.write(outString)
+outFile.close()
